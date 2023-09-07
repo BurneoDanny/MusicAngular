@@ -1,4 +1,5 @@
 
+
 .masthead {
     background-attachment: fixed;
 }
@@ -6,6 +7,12 @@
 .title{
     font-family: 'musik','Space Grotesk', "Helvetica Neue", sans-serif; 
     font-size: 10rem;
+}
+
+@media screen and (max-width:450px) {
+    .title{
+        font-size: 6rem;
+    }
 }
 
 .title p {
@@ -84,5 +91,10 @@ a{
 #calltoaction{
     background-color: rgb(218, 32, 32);
 }
+
+/*----- Charts Section
+--------------------------------------------------------------*/
+
+
 
 

@@ -22,10 +22,6 @@ html, body {
     height: 100%;
 }
 
-body { 
-    margin: 0; 
-    font-family: 'Space Grotesk', "Helvetica Neue", sans-serif; 
-}
 
 @font-face {
     font-family: musik;
@@ -11130,3 +11126,6 @@ footer.footer .social-link:hover {
   font-size: 2.25rem;
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
+
+
+

@@ -1,0 +1,56 @@
+<div id="insert" fxLayout="row" fxLayoutAlign="center center">
+  <form class="example-form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Titulo del album</mat-label>
+            <input matInput maxlength="45" name="nombreInput" />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <mat-label>Breve descripcion sobre el album</mat-label>
+          <textarea
+            matInput
+            maxlength="65535"
+            name="descripcionInput"
+          ></textarea>
+        </mat-form-field>
+      </tr>
+    </table>
+
+    <table class="example-full-width" id="demas" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Año</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="selectedYear"
+              name="selectedYear"
+              min="1600"
+              max="2024"
+              name="selectedYear"
+            />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Artista del album</mat-label>
+            <mat-select [formControl]="artistasSelect">
+              <mat-option
+                *ngFor="let artista of artistas"
+                [value]="artista.idArtista"
+              >
+                {{ artista.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

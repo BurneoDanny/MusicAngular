@@ -1,0 +1,64 @@
+<div id="insert" fxLayout="row" fxLayoutAlign="center center">
+  <form class="example-form" (ngSubmit)="onSubmit()">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              maxlength="45"
+              [(ngModel)]="newArtista.nombre"
+              name="nombreInput"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <mat-label>Breve descripcion sobre el artista</mat-label>
+          <textarea
+            matInput
+            maxlength="65535"
+            [(ngModel)]="newArtista.biografia"
+            name="descripcionInput"
+          ></textarea>
+        </mat-form-field>
+      </tr>
+    </table>
+
+    <table class="example-full-width" id="demas" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label>Pais de origen</mat-label>
+            <mat-select [(ngModel)]="newArtista.pais" name="country">
+              <mat-option
+                *ngFor="let country of countries"
+                [value]="country.name"
+                >{{ country.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Año de fundacion</mat-label>
+            <input
+              matInput
+              type="number"
+              min="1600"
+              max="2024"
+              [(ngModel)]="newArtista.fundacion"
+              name="selectedYear"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <button type="submit" mat-raised-button color="primary">
+      Insertar Artista
+    </button>
+    <p id="verificacion"></p>
+  </form>
+</div>

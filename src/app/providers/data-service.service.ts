@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Artista } from '../interfaces/artista';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class DataServiceService {
   private artistas : string = "/artista/findAll/json";
   private canciones : string = "/cancion/findAll/json";
   private generos : string = "/genero/findAll/json";
+  private postArtistURL = "/artista/post/json"
   private listas : string = "/listadereproduccion/findAll/json";
   private songsByArtist : string = "/artista/findSongsNumberByArtist/json";
   private songsByGenre: string = "/genero/findSongsByGenre/json";
@@ -56,4 +58,7 @@ export class DataServiceService {
     return this.http.get(this.url + this.songsByGenre);
   }
 
+  postNewArtist(artista : Artista){
+    return this.http.post(this.url + this.postArtistURL, artista);
+  }
 }

@@ -1,0 +1,36 @@
+#insert{
+    height: 81vh;
+
+}
+
+.example-form {
+    min-width: auto;
+    max-width: 500px;
+    width: 100%;
+}
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  td {
+    padding-right: 8px;
+  }
+
+@media screen and (max-width: 1000px) {
+
+    #insert{
+        height: 61vh;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+
+
+    #demas tr{
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+  

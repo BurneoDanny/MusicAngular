@@ -22,6 +22,14 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { MatTableModule } from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ArtistInsertComponent } from './pages/artist-insert/artist-insert.component';
+import { SongInsertComponent } from './pages/song-insert/song-insert.component';
+import { AlbumInsertComponent } from './pages/album-insert/album-insert.component';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -32,7 +40,10 @@ import { MatTableModule } from '@angular/material/table';
     AboutComponent,
     MenuComponent,
     CustomDataComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ArtistInsertComponent,
+    SongInsertComponent,
+    AlbumInsertComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +59,10 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

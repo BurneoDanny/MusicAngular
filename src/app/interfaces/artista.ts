@@ -1,5 +1,5 @@
 export interface Artista {
-    idArtista: number
+    idArtista?: number
     nombre: string
     pais: string
     fundacion:number

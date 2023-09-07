@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DataServiceService } from 'src/app/providers/data-service.service';
-import { Chart } from 'chart.js/auto';
 import { Genero } from 'src/app/interfaces/genero';
+import { ChartServiceService } from 'src/app/providers/chart-service.service';
 
 @Component({
   selector: 'app-main',
@@ -11,9 +11,11 @@ import { Genero } from 'src/app/interfaces/genero';
 export class MainComponent {
   songsByArtist : any[] = [];
   generos : any[] = [];
-  constructor(private DataProvider : DataServiceService){
-
-  }
+  artistSongsChart: any;
+  bestGenresChart:any;
+  
+  constructor(private DataProvider : DataServiceService, private ChartProvider: ChartServiceService){}
+  
 
   ngOnInit(){
     this.DataProvider.getSongsByArtist().subscribe((response)=>{
@@ -25,35 +27,27 @@ export class MainComponent {
     })
   }
 
+
   private initializeGraphs(songsByArtist: any[], generos: any[]) {
-    console.log(songsByArtist,generos);
-    
     // Top 10 Artist and their number of songs
-    const top10Artist = songsByArtist.sort((a,b)=>b.numeroDeCanciones-a.numeroDeCanciones).slice(0, 10);
+    const isMobile = window.innerWidth <= 768;
+    const top10Artist = songsByArtist.sort((a,b)=>b.numeroDeCanciones-a.numeroDeCanciones).slice(0, isMobile? 5 : 10) ;
     const data_artists = {
       labels: top10Artist.map((artista) => artista.nombre),
       datasets: [
         {
           label: 'Numero de canciones por artista',
           data: top10Artist.map((artista) => artista.numeroDeCanciones),
-          backgroundColor: '#7da3e8',
+          backgroundColor: ["#DF4550","#DF4550","#DF4550","#DF4550","#2B3EE5","#2B3EE5","#2B3EE5","#E5EB4D","#E5EB4D","#E5EB4D"].slice(0, isMobile ? 5 : 10),
           borderWidth: 1,
         },
       ],
     };
-    const chart_mostVotes = new Chart(
-      document.getElementById('artistSongs') as HTMLCanvasElement,
-      {
-        type: 'bar',
-        data: data_artists,
-        options: {
-          responsive: true,
-          interaction: {
-            intersect: false,
-          },
-        },
-      }
+    this.artistSongsChart = this.ChartProvider.getDefaultBarChart(
+      'artistSongs',
+      data_artists
     );
+
 
     // Top 3 genre with most songs
     const top3genre = generos.slice(0, 3);
@@ -61,32 +55,29 @@ export class MainComponent {
     const data_genres = {
       labels: labels,
       datasets: [{
-        label: 'My First Dataset',
+        label: 'Cantidad de canciones',
         data: top3genre.map((genre) => genre.NumeroDeCanciones),
         backgroundColor: [
           'rgb(255, 99, 132)',
           '#000',
           'rgb(54, 162, 235)',
         ],
+        hoverBackgroundColor: ["#F6607E","#4B4B4B","#2C8FD1"],
         hoverOffset: 4
       }]
     };
-
-    const chart_mostGenres = new Chart(
-      document.getElementById('bestGenres') as HTMLCanvasElement,
-      {
-        type: 'pie',
-        data: data_genres,
-        options: {
-          responsive: true,
-          interaction: {
-            intersect: false,
-          },
-        },
-      }
-    );
+    this.bestGenresChart = this.ChartProvider.getDefaultPieChart('bestGenres', data_genres);
 
 
+  }
+
+  ngOnDestroy() {
+    if (this.artistSongsChart) {
+      this.artistSongsChart.destroy();
+    }
+    if (this.bestGenresChart) {
+      this.bestGenresChart.destroy();
+    }
   }
 }
 
